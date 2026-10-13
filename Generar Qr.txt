@@ -1,0 +1,115 @@
+import React, { useState } from "react";
+import { Table, Button, Icon } from "semantic-ui-react";
+import { ModalBasic } from "../../Common";
+import QRCode from "qrcode.react";
+import "./CodeQrsAdmin.scss";
+
+export function CodeQrsAdmin(props) {
+  const { updateCodeqr, deleteCodeqr } = props;
+  const [showModal, setShowModal] = useState(false);
+  const [contentModal, setContentModal] = useState(null);
+  const [currentQR, setCurrentQR] = useState(0);
+  const [qrPairs, setQrPairs] = useState([]);
+
+  const generateQRPairs = () => {
+    const pairs = [];
+    while (pairs.length < 5000) {
+      const num1 = getRandomNumber();
+      let num2 = getRandomNumber();
+      while (num2 === num1) {
+        num2 = getRandomNumber();
+      }
+      pairs.push(`${num1}-${num2}`);
+    }
+    setQrPairs(pairs);
+  };
+
+  const getRandomNumber = () => {
+    return Math.floor(Math.random() * 10000).toString().padStart(4, "0");
+  };
+
+  const openModal = (qrIndex) => {
+    setCurrentQR(qrIndex);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setCurrentQR(0);
+  };
+
+  const showNextQR = () => {
+    setCurrentQR(currentQR + 1);
+  };
+
+  const showPreviousQR = () => {
+    setCurrentQR(currentQR - 1);
+  };
+
+  return (
+    <>
+      <div style={{ maxHeight: "500px", overflowY: "auto" }}>
+        <Table className="Code-Qrs-admin">
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Qr numero</Table.HeaderCell>
+              <Table.HeaderCell></Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+
+          <Table.Body>
+            {qrPairs.map((pair, index) => (
+              <Table.Row key={index}>
+                <Table.Cell>
+                  <Button onClick={() => openModal(index)}>
+                    Ver QR {index.toString().padStart(4, "0")}
+                  </Button>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+      </div>
+
+      <ModalBasic
+        show={showModal}
+        onClose={closeModal}
+        title="Codigo QR"
+        size="mini"
+        children={
+          <QRModal
+            currentQR={currentQR}
+            qrPairs={qrPairs}
+            showNextQR={showNextQR}
+            showPreviousQR={showPreviousQR}
+          />
+        }
+      />
+
+      <Button onClick={generateQRPairs}>Generar QRs Aleatorios</Button>
+    </>
+  );
+}
+
+function QRModal({ currentQR, qrPairs, showNextQR, showPreviousQR }) {
+  const qrContent = qrPairs[currentQR];
+
+  return (
+    <div style={{ textAlign: "center" }}>
+      <QRCode value={qrContent} />
+      <div>
+        <p>{qrContent}</p>
+        <Button icon onClick={showPreviousQR} disabled={currentQR === 0}>
+          <Icon name="arrow left" />
+        </Button>
+        <Button
+          icon
+          onClick={showNextQR}
+          disabled={currentQR === qrPairs.length - 1}
+        >
+          <Icon name="arrow right" />
+        </Button>
+      </div>
+    </div>
+  );
+}

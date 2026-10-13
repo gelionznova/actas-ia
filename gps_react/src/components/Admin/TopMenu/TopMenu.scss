@@ -1,0 +1,13 @@
+.top-menu-admin {
+ 
+  &__greeting {
+    font-size: 1rem; // Tamaño de fuente normal para el saludo
+    font-style: italic; // Estilo cursiva para el saludo
+    padding-right: 15px; // Espacio entre el saludo y el botón de logout
+  }
+
+  i.icon {
+    margin: 0 !important;
+    /* Elimina cualquier margen en los iconos dentro del menú */
+  }
+}

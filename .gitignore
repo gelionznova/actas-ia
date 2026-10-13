@@ -1,0 +1,33 @@
+# Dependencias y entornos locales
+node_modules/
+.venv/
+venv/
+env/
+pyvenv.cfg
+
+# Archivos generados
+__pycache__/
+*.py[cod]
+build/
+dist/
+coverage/
+gps_django/staticfiles/
+gps_django/uploads/
+*.log
+*.stackdump
+*.bak
+~$*
+
+# Bases de datos y configuracion privada
+*.sqlite3
+*.sqlite3-*
+*.sqlit3
+.env
+.env.*
+!.env.example
+gps_django/gps/setting.txt
+
+# Configuracion del editor y del sistema
+.vscode/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,17 @@
+# Dependencias utilizadas por la aplicacion; Python 3.11.
+Django==5.2.12
+djangorestframework==3.16.1
+djangorestframework-simplejwt==5.3.1
+django-cors-headers==4.9.0
+django-filter==23.5
+drf-yasg==1.21.7
+psycopg2-binary==2.9.11
+whitenoise==6.6.0
+Pillow==10.1.0
+pytz==2023.3.post1
+docxtpl==0.17.0
+
+# Transcripcion de audio. faster-whisper decodifica con PyAV, asi que no hace
+# falta instalar FFmpeg aparte. El modelo se descarga la primera vez, o se
+# indica una carpeta local con WHISPER_MODEL_PATH.
+faster-whisper==1.2.1

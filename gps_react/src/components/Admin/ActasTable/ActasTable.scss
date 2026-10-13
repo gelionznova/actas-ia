@@ -1,0 +1,52 @@
+.actas-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 1rem;
+
+    .actas-table {
+        width: 100%;
+        min-width: 768px; // Forces horizontal scroll in small screens
+
+        .no-audio {
+            color: #999;
+        }
+
+        .status {
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+
+            &.generated {
+                color: #388e3c;
+            }
+
+            &.pending {
+                color: #d84315;
+            }
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+
+            .ui.button {
+                flex: 1 1 auto;
+            }
+        }
+    }
+}
+
+/* Mobile optimization */
+@media screen and (max-width: 768px) {
+    .actas-table-wrapper {
+        .action-buttons {
+            flex-direction: column;
+
+            .ui.button {
+                width: 100%;
+            }
+        }
+    }
+}                   
